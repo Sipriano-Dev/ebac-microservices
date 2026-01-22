@@ -1,10 +1,8 @@
-package br.com.sipriano.animalservice.entidades;
+package br.com.sipriano.animalservice.entity;
 
 import jakarta.persistence.*;
 
 import java.sql.Date;
-
-
 
 @Entity
 public class Animal {
@@ -19,9 +17,6 @@ public class Animal {
 
     @Column(nullable = false)
     private String idadeEstimada;
-
-    @Column(nullable = false)
-    private String raca;
 
     @Column(nullable = false)
     private Date dataEntrada;
@@ -39,7 +34,11 @@ public class Animal {
     private Date dataObito;
 
     @Column(nullable = false)
-    private String Porte;
+    private String porte;
+
+    @ManyToOne
+    @JoinColumn(name = "raca_id", nullable = false)
+    private Raca raca;
 
     public Integer getId() {
         return id;
@@ -61,11 +60,11 @@ public class Animal {
         this.idadeEstimada = idadeEstimada;
     }
 
-    public String getRaca() {
+    public Raca getRaca() {
         return raca;
     }
 
-    public void setRaca(String raca) {
+    public void setRaca(Raca raca) {
         this.raca = raca;
     }
 
@@ -110,10 +109,10 @@ public class Animal {
     }
 
     public String getPorte() {
-        return Porte;
+        return porte;
     }
 
     public void setPorte(String porte) {
-        Porte = porte;
+        this.porte = porte;
     }
 }
