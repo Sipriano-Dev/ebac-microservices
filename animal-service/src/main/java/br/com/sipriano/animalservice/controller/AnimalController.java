@@ -1,11 +1,13 @@
 package br.com.sipriano.animalservice.controller;
 
 import br.com.sipriano.animalservice.controller.dto.AnimalRequestDTO;
+import br.com.sipriano.animalservice.controller.dto.FuncionarioResgateDTO;
 import br.com.sipriano.animalservice.entity.Animal;
 import br.com.sipriano.animalservice.repository.AnimalRepository;
 import br.com.sipriano.animalservice.service.AnimalService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -39,6 +41,14 @@ public class AnimalController {
     @GetMapping("/adopted")
     private List<Animal> listarAdotados() {
         return animalRepository.findAdopted();
+    }
+
+    @GetMapping("/resgates/funcionarios")
+    public List<FuncionarioResgateDTO> buscarResgatesPorFuncionario(
+            @RequestParam LocalDate inicio,
+            @RequestParam LocalDate fim
+    ) {
+        return animalService.buscarResgatesPorFuncionario(inicio, fim);
     }
 
 }
